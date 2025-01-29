@@ -41,8 +41,8 @@ No nível Aventureiro, você expandirá o sistema para incluir propriedades calc
 
 ### 🆕 Diferença em relação ao Nível Novato:
 - **Novas Propriedades Calculadas:**
-  - **Densidade Populacional:** População dividida pela área da cidade.
-  - **PIB per Capita:** PIB total dividido pela população.
+- **Densidade Populacional:** População dividida pela área da cidade.
+- **PIB per Capita:** PIB total dividido pela população.
 
 ### ⚙️ Funcionalidades do Sistema:
 - O sistema agora calculará automaticamente a Densidade Populacional e o PIB per Capita com base nos dados inseridos.

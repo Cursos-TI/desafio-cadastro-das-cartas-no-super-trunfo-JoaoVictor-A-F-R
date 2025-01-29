@@ -1,23 +1,15 @@
 #include <stdio.h>
+//Estrutura das cartas
+char nm_cidade[50];
+int populacao, num_pt_turisticos;
+int cd_cidade = 0;
+float area;
+double pib, densidade_pop, pib_capita;
 
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-
-int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
-    char nm_cidade[30];
-    int populacao, num_pt_turisticos;
-    int cd_cidade = 0;
-    float area;
-    double pib;
-    // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
+int entrada_dados(){
+    //Recebe os dados do usuário
     printf("Digite o nome da Cidade: ");
-    scanf("%s", &nm_cidade);
+    fgets(nm_cidade, sizeof(nm_cidade), stdin);
     printf("Digite a populacao: ");
     scanf("%d", &populacao);
     printf("Digite o numero de pontos turisticos: ");
@@ -26,12 +18,33 @@ int main() {
     scanf("%f", &area);
     printf("Digite o pib: ");
     scanf("%lf", &pib);
+
+    return 0;
+}
+
+int processamento_dados(){
+    //Realiza o calculo dos dados necesarios para exibição das cartas
     cd_cidade++;
-    // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
+    densidade_pop = (double) populacao / area;
+    pib_capita = (double) pib / populacao;
+
+    return 0;
+}
+
+int exibir_carta(){
+    //Exibi as cartas de acordo com as informações dadas pelo usuario
     printf("======================================================\n");
-    printf("Código da cidade: %d\nNome da cidade: %s\nPopulação: %d\nNumero de potos turísticos: %d\nÁrea da cidade: %.2f Km\nPIB: R$ %.2lf\n", cd_cidade, nm_cidade, populacao, num_pt_turisticos, area, pib);
+    printf("Código da cidade: %d\nNome da cidade: %s\nPopulação: %d\nNumero de potos turísticos: %d\nÁrea da cidade: %.2f KM\nPIB: R$ %.2lf\nDensidade Populacional: %.2lf HAB/KM²\nPIB per Capita: R$ %.2lf\n", cd_cidade, nm_cidade, populacao, num_pt_turisticos, area, pib, densidade_pop, pib_capita);
     printf("======================================================\n");
+
+    return 0;
+}
+
+int main() {
+
+    entrada_dados();
+    processamento_dados();
+    exibir_carta();
+
     return 0;
 }
