@@ -1,50 +1,81 @@
 #include <stdio.h>
-//Estrutura das cartas
-char nm_cidade[50];
-int populacao, num_pt_turisticos;
-int cd_cidade = 0;
-float area;
-double pib, densidade_pop, pib_capita;
+#include <string.h>
+#include <stdlib.h>
 
-int entrada_dados(){
+//variaveis globais
+int rep = 1;
+int cd_cidade[2];
+char nm_cidade[2][50];
+int populacao[2], num_pt_tur[2], area[2];
+float pib[2];
+double densidade_pop[2], pib_capita[2];
+
+int Entrada_dados(int i){
     //Recebe os dados do usuário
+    int comparar;
+    printf("========== Carta %d ==========\n", i+1 );
     printf("Digite o nome da Cidade: ");
-    fgets(nm_cidade, sizeof(nm_cidade), stdin);
+    fgets(nm_cidade[i], sizeof(nm_cidade[i]), stdin);
+
     printf("Digite a populacao: ");
-    scanf("%d", &populacao);
+    scanf("%d", &populacao[i]);
+    getchar();
+
     printf("Digite o numero de pontos turisticos: ");
-    scanf("%d", &num_pt_turisticos);
+    scanf("%d", &num_pt_tur[i]);
+    getchar();
+
     printf("Digite a area da cidade: ");
-    scanf("%f", &area);
+    scanf("%d", &area[i]);
+    getchar();
+
     printf("Digite o pib: ");
-    scanf("%lf", &pib);
+    scanf("%f", &pib[i]);
+    getchar();
+
+    Processamento_dados(i);
+
+    if (rep)
+    {
+        rep = !rep;
+        Entrada_dados(i+1);
+    }
+    
+    printf("==============================\n");
+    printf("Qual atributo comparar?");
+    printf("1 - Populacao\n2- Numero de Pontos Turisticos\n3 - Area\n4 - PIB\n5 - Densidade Populacional\n6 - PIB per Capita");
+    scanf("%d", &comparar);
 
     return 0;
 }
 
-int processamento_dados(){
+int Processamento_dados(int i){
     //Realiza o calculo dos dados necesarios para exibição das cartas
-    cd_cidade++;
-    densidade_pop = (double) populacao / area;
-    pib_capita = (double) pib / populacao;
-
+    cd_cidade[i] += 1;
+    densidade_pop[i] = (double) populacao[i] / area[i];
+    pib_capita[i] = (double) pib[i] / populacao[i];
     return 0;
 }
 
-int exibir_carta(){
-    //Exibi as cartas de acordo com as informações dadas pelo usuario
+int Exibir_carta(int i) {
     printf("======================================================\n");
-    printf("Código da cidade: %d\nNome da cidade: %s\nPopulação: %d\nNumero de potos turísticos: %d\nÁrea da cidade: %.2f KM\nPIB: R$ %.2lf\nDensidade Populacional: %.2lf HAB/KM²\nPIB per Capita: R$ %.2lf\n", cd_cidade, nm_cidade, populacao, num_pt_turisticos, area, pib, densidade_pop, pib_capita);
+    printf("Código da Cidade: #0%d #0%d\n", cd_cidade[i], cd_cidade[i+1]);
+    printf("Nome da Cidade: %s || %s", nm_cidade[i], nm_cidade[i+1]);
+    printf("População: %d\n", populacao[i]);
+    printf("Numero de pontos Turísticos: %d\n", num_pt_tur[i]);
+    printf("Área da cidade: %d KM\n", area[i]);
+    printf("PIB: %.2f R$\n", pib[i]);
+    printf("Densidade Populacional: %.2lf HAB/KM²\n", densidade_pop[i]);
+    printf("PIB per Capita: %.2lf R$\n", pib_capita[i]);
     printf("======================================================\n");
 
     return 0;
 }
 
 int main() {
-
-    entrada_dados();
-    processamento_dados();
-    exibir_carta();
-
+    //carta c;
+    int i = 0;
+    Entrada_dados(i);
+    Exibir_carta(i);
     return 0;
 }
